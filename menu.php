@@ -61,6 +61,21 @@ float: right;
 
 }
 
+h1{
+	color: white;
+  font-size: 3.5em;
+  font-family: Algerian;
+}
+h2{
+	text-align: center;
+	color: white;
+	font-size: 3.5em;
+	font-family: Algerian; 
+}
+p{
+	color: white;
+	font-size: 4;
+}
 </style>
 
 <body>
@@ -131,24 +146,23 @@ if (isset($_POST["boton"])) {
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <h1 class="text-center"><font color="white" size="7" face="Algerian">SISTEMA DE Votación COLEGIO</font></h1>
+      <h1 class="text-center">SISTEMA DE Votación COLEGIO</h1>
     </div>
   </div>
 
 </div>
 
  <div class="center-block col-md-12 col-xs-8">
-     <h2><font color="white" size="5"><center>Bienvenido Al Modulo de  Administración</center></font></h2>
+     <h2>Bienvenido Al Modulo de  Administración</h2>
 <br>
 <br>
 
-<center>
-     <a href="alumnos.php"><button class="btn btn-primary">  <font size="4">Agregar Alumno</font></button></a>
-     <a href="candidato.php"><button class="btn btn-success">  <font size="4">Agregar Candidato</font></button></a>
-     <a href="resultados.php"><button class="btn btn-warning">  <font size="4">Resultados</font></button></a>
-     <a href="votar.php"><button class="btn btn-danger">  <font size="4">Votación</font></button></a>
-</center>
-
+<div style="text-align: center;">
+ <a href="alumnos.php"><button class="btn btn-primary"><p>Agregar Alumno</p></button></a>
+ <a href="candidato.php"><button class="btn btn-success"> <p>Agregar Candidato</p></button></a>
+ <a href="resultados.php"><button class="btn btn-warning"><p>Resultados</p></button></a>
+ <a href="votar.php"><button class="btn btn-danger"><p>Votación</p></button></a>
+</div>
 
 
 </div>

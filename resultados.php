@@ -53,8 +53,25 @@ box-shadow:inset;
 
 }
 
-
-
+h1{
+	color: white;
+  font-size: 3.5em;
+  font-family: Algerian;
+}
+p{
+	color: white;
+	font-size: 4;
+}
+.my-table {
+    font-size: 8pt;
+    font-family: Verdana;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  
+  .my-table th {
+    font-weight: bold;
+  }
 </style>
 
 
@@ -85,83 +102,84 @@ box-shadow:inset;
 </nav>
 
 <?php
-   require_once("conexion.php");
-    
-		error_reporting(E_ALL ^ E_NOTICE);
-$vacio = isset($_POST['variable']) ? $_POST['variable'] : null ;
-    $acceso = isset($_POST['variable']) ? $_POST['variable'] : null ;
-	 session_start();
-        $cedula=$_SESSION["cedula_alumno"];
-     $carrera=$_SESSION["carrera"];
- if (empty($acceso)) {
-   
-}
-    if (isset($_POST["municipios"])){
-	 $municipio=$_POST["municipios"];
-	}else{
-	$municipio="";
-	}
+require_once("conexion.php");
+error_reporting(E_ALL ^ E_NOTICE);
 
-if (isset($_POST["parroquias"])){
-	 $parroquias=$_POST["parroquias"];
-	}else{
-	$parroquias="";
-	}
-       if (isset($_POST["nombre"])){
-	 $nombre=$_POST["nombre"];
-	}else{
-	$nombre="";
-	}
+$vacio = isset($_POST['variable']) ? $_POST['variable'] : null;
+$acceso = isset($_POST['variable']) ? $_POST['variable'] : null;
 
-if (isset($_POST["cedula_candidato"])){
-	 $cedula_candidato=$_POST["cedula_candidato"];
-	}else{
-	$cedula_candidato="";
-	}
- if (isset($_POST["alumno"])) {
-    $alumno=$_POST["alumno"];
-}
-     if (isset($_POST["cod_candidato"])) {
-    $cod_candidato=$_POST["cod_candidato"];
-}
-     if (isset($_POST["cedula_alumno"])) {
-    $alu=$_POST["cedula_alumno"];
+session_start();
+$cedula = $_SESSION["cedula_alumno"];
+$carrera = $_SESSION["carrera"];
+
+if (empty($acceso)) {
+    // Hacer algo si $acceso está vacío
 }
 
+if (isset($_POST["municipios"])) {
+    $municipio = $_POST["municipios"];
+} else {
+    $municipio = "";
+}
+
+if (isset($_POST["parroquias"])) {
+    $parroquias = $_POST["parroquias"];
+} else {
+    $parroquias = "";
+}
+
+if (isset($_POST["nombre"])) {
+    $nombre = $_POST["nombre"];
+} else {
+    $nombre = "";
+}
+
+if (isset($_POST["cedula_candidato"])) {
+    $cedula_candidato = $_POST["cedula_candidato"];
+} else {
+    $cedula_candidato = "";
+}
+
+if (isset($_POST["alumno"])) {
+    $alumno = $_POST["alumno"];
+}
+
+if (isset($_POST["cod_candidato"])) {
+    $cod_candidato = $_POST["cod_candidato"];
+}
+
+if (isset($_POST["cedula_alumno"])) {
+    $alu = $_POST["cedula_alumno"];
+}
 
 if (isset($_POST["boton"])) {
-    $boton=$_POST["boton"];
-	switch ($boton) {
-		case "votar":
+    $boton = $_POST["boton"];
 
-          
-		$sql="update alumnos set voto='1', cod_candidato='$municipio' where cedula_Alumno='$cedula'";
-		$resultado=mysqli_query($cx,$sql);
-		$nr=mysqli_affected_rows($resultado);
+    switch ($boton) {
+        case "votar":
+            $sql = "UPDATE alumnos SET voto='1', cod_candidato='$municipio' WHERE cedula_Alumno='$cedula'";
+            $resultado = mysqli_query($cx, $sql);
+            $nr = mysqli_affected_rows($resultado);//esta linea de codigo no la modifico ya que no es necesario hacerlo
+			// no me representa ningun error si esta sumando los votos pero necesito hacer para algun cambio si se presenta algo
+            
             echo $nr;
-		if ($nr >= 1) {
-		?>
-			<script>
-				alert ('');
-			</script>
-		<?php
-		echo $alu;
-		}
-           
-            		
-		break;
-   
+            
+            if ($nr >= 1) {
+                echo '<script>alert("");</script>';
+                echo $alu;
+            }
+            
+            break;
+    }
 }
-
-}
-
 ?>
+
 <div class="contenedor">
 
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center"><font color="white" size="7" face="Algerian">RESULTADO DE VOTACIONES</font></h1>
+      <h1 class="text-center">RESULTADO DE VOTACIONES</h1>
     </div>
   </div>
 
@@ -174,7 +192,7 @@ if (isset($_POST["boton"])) {
   
  
  <fieldset>
-							<legend><em><strong><font color="white" >Resultado de las votaciones</font></strong></em></legend>
+							<legend><em><strong><p>Resultado de las votaciones</p></strong></em></legend>
 						<?php
 							
 							$sql="select * from carreras";
@@ -200,15 +218,14 @@ if (isset($_POST["boton"])) {
 					</fieldset>
 <br>
 
-<table class="table table-hover table-striped text-center"border="1" cellspacing=1 cellpadding=2 style="font-size: 8pt">
+<table class="table table-hover table-striped text-center my-table" cellspacing="1" cellpadding="2">
 <thead>
 <tr>
-<td><font face="verdana"><b>Identidad del candidato</b></font></td>
-<td><font face="verdana"><b>Nombre</b></font></td>
-<td><font face="verdana"><b>Grado</b></font></td>
-<td><font face="verdana"><b>Votos</b></font></td>
+<td>Identidad del candidato</td>
+<td>Nombre</td>
+<td>Grado</td>
+<td>Votos</td>
 </tr>
-    </thead>
 <div class="tabla">
 <?php 
     

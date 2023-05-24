@@ -53,7 +53,16 @@ box-shadow:inset;
 
 }
 
-
+h1{
+	color: white;
+  font-size: 3.5em;
+  font-family: Algerian;
+  text-align: center;
+}
+p{
+	color: white;
+	font-size: 4;
+}
 
 </style>
 
@@ -71,7 +80,7 @@ box-shadow:inset;
     $alumno=$_POST["alumno"];
 }
 
-
+$acceso="";
 
 
 if (isset($_POST["boton"])) {
@@ -122,17 +131,17 @@ if (isset($_POST["boton"])) {
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <h1 class="text-center"><font color="white" size="7" face="Algerian">SISTEMA DE Votación COLEGIO</h1></font><br>
+      <h1 class="text-center">SISTEMA DE VOTACION <br>
     </div>
   </div>
 
 
 
-	<center>
+	
  <div class="center-block col-md-8 col-xs-8">
 <form action="votar.php" role="form" method="post">
   <div class="form-group">
-    <label for="alumno"><font color="white">Tarjeta de identidad del Alumno</font></label>
+    <label for="alumno"><p>Tarjeta de identidad del Alumno</p></label>
     <input type="text" name="alumno" class="form-control" id="alumno"
            placeholder="Identidad del Alumno">
   </div>
@@ -142,10 +151,13 @@ if (isset($_POST["boton"])) {
 </form>
 <br>
 <br>
-<center><a href="admin.php"><button class="btn btn-warning">ADMINISTRADOR</button></a></center>
+<div style="text-align: center;">
+<a href="admin.php"><button class="btn btn-warning">ADMINISTRADOR</button></a>
+
+
 
 <br>
- <div align="center">
+ <div style="text-align: center;">
 			<?php
  
 			if ($acceso=="denegado") {
@@ -157,7 +169,7 @@ if (isset($_POST["boton"])) {
 			
 	   </div>
 </div>
-</center>
+</div>
 </div>
 </div>
 <script src="js/jquery-1.11.3.min.js"></script>
@@ -168,6 +180,6 @@ if (isset($_POST["boton"])) {
 
 
 
-<center><font color="white" size="7" face="Algerian">VOTACIONES 2018</font></center>
+<h1> VOTACIONES 2023</h1>
 </body>
 </html>

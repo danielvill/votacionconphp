@@ -49,11 +49,15 @@ height: 500px;
 transition: .8s;
 background-color:rgba(0,0,0 ,.2);
 box-shadow:inset;
-   
-
 }
-
-
+h1{
+	color: white;
+  font-size: 3.5em;
+  font-family: Algerian;
+}
+p{
+	color: white;
+}
 
 </style>
 
@@ -84,116 +88,73 @@ box-shadow:inset;
 </nav>
 
 <?php
-   require_once("conexion.php");
+require_once("conexion.php");
 
-    
-		error_reporting(E_ALL ^ E_NOTICE);
-$vacio = isset($_POST['variable']) ? $_POST['variable'] : null ;
-    $acceso = isset($_POST['variable']) ? $_POST['variable'] : null ;
-	 session_start();
-        $cedula=$_SESSION["cedula_alumno"];
-  
- if (empty($acceso)) {
-   
-}
-  if (isset($_POST["id_carreras"])){
-	 $id_carreras=$_POST["id_carreras"];
-	}else{
-	$id_carreras="";
-	
-    }
-  if (isset($_POST["municipios"])){
-	 $municipio=$_POST["municipios"];
-	}else{
-	$municipio="";
+error_reporting(E_ALL ^ E_NOTICE);
+
+$variable = isset($_POST['variable']) ? $_POST['variable'] : null;
+$acceso = isset($_POST['variable']) ? $_POST['variable'] : null;
+session_start();
+if (isset($_SESSION["cedula_alumno"])) {
+    // Asignar el valor de la variable de sesión a la variable $cedula_alumno
+    $cedula_alumno = $_SESSION["cedula_alumno"];
 	}
 
-if (isset($_POST["parroquias"])){
-	 $parroquias=$_POST["parroquias"];
-	}else{
-	$parroquias="";
-	}
-       if (isset($_POST["nombre"])){
-	 $nombre=$_POST["nombre"];
-	}else{
-	$nombre="";
-	}
-
-if (isset($_POST["cedula"])){
-	 $cedula=$_POST["cedula"];
-	}else{
-	$cedula="";
-	}
- if (isset($_POST["alumno"])) {
-    $alumno=$_POST["alumno"];
-}
-     if (isset($_POST["cod_candidato"])) {
-    $cod_candidato=$_POST["cod_candidato"];
-}
-     if (isset($_POST["cedula_alumno"])) {
-    $alu=$_POST["cedula_alumno"];
-}
-
+$id_carreras = isset($_POST["id_carreras"]) ? $_POST["id_carreras"] : "";
+$municipio = isset($_POST["municipios"]) ? $_POST["municipios"] : "";
+$parroquias = isset($_POST["parroquias"]) ? $_POST["parroquias"] : "";
+$nombre = isset($_POST["nombre"]) ? $_POST["nombre"] : "";
+$cedula = isset($_POST["cedula"]) ? $_POST["cedula"] : "";
+$alumno = isset($_POST["alumno"]) ? $_POST["alumno"] : "";
+$cod_candidato = isset($_POST["cod_candidato"]) ? $_POST["cod_candidato"] : "";
+$alu = isset($_POST["cedula_alumno"]) ? $_POST["cedula_alumno"] : "";
 
 if (isset($_POST["boton"])) {
-    $boton=$_POST["boton"];
-	switch ($boton) {
-            
-		case "guardar":                
-             if (empty($cedula)){
-	?>
-			
-			<script>
-			alert('Ingrese  cedula');
-			</script>
-			<?php
-			
-			break;
-	
-	}
-	if (! is_numeric($cedula)){
-	?>
-			
-			<script>
-			alert('Por favor colocar  solo numero en la cedula');
-			</script>
-			<?php
-			
-			break;
-	
-	}
-                        if (empty($nombre)){
-	?>
-			
-			<script>
-			alert('ingrese  Nombre');
-			</script>
-			<?php
-			
-			break;
-	
-	}
-         
-          
-		$sql="insert into candidatos (cedula_candidato,nombre,cod_candidato) values ('$cedula','$nombre','$cedula') ";
-		$resultado=mysqli_query($cx,$sql);
-		 if ($resultado){
-              	$acceso="aprobado";
-			?>
-			
-	
-			<?php
-			}
-		$cedula="";
-		$usuario="";
-		$nombre="";
-		$clave="";
-		$nivel="";
-	$clavev="";
-		break;
-  }
-}
+    $boton = $_POST["boton"];
+    switch ($boton) {
+        case "guardar":
+            if (empty($cedula)) {
+                ?>
+                <script>
+                    alert('Ingrese cedula');
+                </script>
+                <?php
+                break;
+            }
+            if (!is_numeric($cedula)) {
+                ?>
+                <script>
+                    alert('Por favor coloque solo números en la cedula');
+                </script>
+                <?php
+                break;
+            }
+            if (empty($nombre)) {
+                ?>
+                <script>
+                    alert('Ingrese Nombre');
+                </script>
+                <?php
+                break;
+            }
 
+            $sql = "INSERT INTO candidatos (cedula_candidato, nombre, cod_candidato) VALUES ('$cedula', '$nombre', '$cedula')";
+            $resultado = mysqli_query($cx, $sql);
+            if ($resultado) {
+                $acceso = "aprobado";
+                ?>
+                <!-- Aquí puedes agregar código HTML o JavaScript adicional en caso de éxito -->
+                <?php
+            }
+            $cedula = "";
+            $usuario = "";
+            $nombre = "";
+            $clave = "";
+            $nivel = "";
+            $clavev = "";
+            break;
+    }
+}
 ?>
 
 <div class="contenedor">
@@ -201,7 +162,7 @@ if (isset($_POST["boton"])) {
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center"><font color="white" size="7" face="Algerian">Registro de Candidatos</font></h1>
+      <h1 class="text-center">Registro de Candidatos</h1>
     </div>
   </div>
 
@@ -216,12 +177,12 @@ if (isset($_POST["boton"])) {
 
 					
   <div class="form-group">
-    <label for="Usuario"><font color="white" size="4">Tarjeta de identidad</font></label>
+    <label for="Usuario"><p>Tarjeta de identidad</p></label>
     <input type="text" name="cedula" class="form-control" id="cedula"
            placeholder="">
   </div>
   <div class="form-group">
-    <label for="ejemplo_password_1"><font color="white" size="4">Nombre y apellido</font></label>
+    <label for="ejemplo_password_1"><p>Nombre y apellido</p></label>
     <input type="text" name="nombre" class="form-control" id="nombre" 
            placeholder="">
   </div>

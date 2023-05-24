@@ -5,28 +5,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Votación</title>
-
-
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/estilo.css" rel="stylesheet">
-
-
 </head>
 
 <style>
   
 body{
-
 background-image: url(img/voto.png);
-
-
 background-size: 100%;
-
-
-  
 }
-
-
 .contenedor{
 
 border-color: black;
@@ -38,22 +26,18 @@ margin-right: 20%;
 margin-left: 20%;
 width: 60%;
 height: 500px;
-
-
-
-
 }
 
 .contenedor:hover{
-
 transition: .8s;
 background-color:rgba(0,0,0 ,.2);
 box-shadow:inset;
-   
-
 }
-
-
+h1 {
+  color: white;
+  font-size: 3.5em;
+  font-family: Algerian;
+}
 
 </style>
 
@@ -83,200 +67,123 @@ box-shadow:inset;
 </nav>
 
 <?php
-   require_once("conexion.php");
+require_once("conexion.php");
 
-    
-		error_reporting(E_ALL ^ E_NOTICE);
-$vacio = isset($_POST['variable']) ? $_POST['variable'] : null ;
-    $acceso = isset($_POST['variable']) ? $_POST['variable'] : null ;
-	 session_start();
-        $cedula=$_SESSION["cedula_alumno"];
-  
- if (empty($acceso)) {
-   
-}
-  if (isset($_POST["id_carreras"])){
-	 $id_carreras=$_POST["id_carreras"];
-	}else{
-	$id_carreras="";
-	
-    }
-  if (isset($_POST["municipios"])){
-	 $municipio=$_POST["municipios"];
-	}else{
-	$municipio="";
-	}
+// Validar el acceso y la variable de formulario
+$acceso = $_POST['acceso'] ?? null;
+$vacio = $_POST['variable'] ?? null;
 
-if (isset($_POST["parroquias"])){
-	 $parroquias=$_POST["parroquias"];
-	}else{
-	$parroquias="";
-	}
-       if (isset($_POST["nombre"])){
-	 $nombre=$_POST["nombre"];
-	}else{
-	$nombre="";
-	}
+session_start();
 
-if (isset($_POST["cedula"])){
-	 $cedula=$_POST["cedula"];
-	}else{
-	$cedula="";
-	}
- if (isset($_POST["alumno"])) {
-    $alumno=$_POST["alumno"];
-}
-     if (isset($_POST["cod_candidato"])) {
-    $cod_candidato=$_POST["cod_candidato"];
-}
-     if (isset($_POST["cedula_alumno"])) {
-    $alu=$_POST["cedula_alumno"];
+if (isset($_POST["cedula_alumno"])) {
+    $cedula_alumno = $_POST["cedula_alumno"];
+} 
+
+
+if (empty($acceso)) {
+    // Acceso no válido
 }
 
+// Obtener los datos del formulario
+$id_carreras = $_POST["id_carreras"] ?? "";
+$municipio = $_POST["municipios"] ?? "";
+$parroquias = $_POST["parroquias"] ?? "";
+$nombre = $_POST["nombre"] ?? "";
+$cedula = $_POST["cedula"] ?? "";
+$alumno = $_POST["alumno"] ?? "";
+$cod_candidato = $_POST["cod_candidato"] ?? "";
+$alu = $_POST["cedula_alumno"] ?? "";
 
 if (isset($_POST["boton"])) {
-    $boton=$_POST["boton"];
-	switch ($boton) {
-            
-		case "guardar": 
-             if (empty($municipio)){
-	?>
-			
-			<script>
-			alert('Ingrese  el grado');
-			</script>
-			<?php
-			
-			break;
-	
-	}
-            if (empty($cedula)){
-	?>
-			
-			<script>
-			alert('Ingrese su tarjeta de identidad');
-			</script>
-			<?php
-			
-			break;
-	
-	}
-	if (! is_numeric($cedula)){
-	?>
-			
-			<script>
-			alert('Por favor colocar solo tarjeta de identidad');
-			</script>
-			<?php
-			
-			break;
-	
-	}
-                        if (empty($nombre)){
-	?>
-			
-			<script>
-			alert('ingrese Nombre y apellido');
-			</script>
-			<?php
-			
-			break;
-	
-	}
-            
-	
-            
-		$sql="insert into alumnos (cedula_alumno,nombre,carrera,cod_candidato,voto) values ('$cedula','$nombre','$municipio','0','0') ";
-		$resultado=mysqli_query($cx,$sql);
-       if ($resultado){
-           	$acceso="aprobado";
-			?>
-		
-			
-			<?php
-			}
-		$cedula="";
-		$usuario="";
-		$nombre="";
-		$clave="";
-		$nivel="";
-	$clavev="";
-		break;
-            
-  }
+    $boton = $_POST["boton"];
+    switch ($boton) {
+        case "guardar":
+            if (empty($municipio)) {
+                $error_message = 'Ingrese el grado';
+            } elseif (empty($cedula)) {
+                $error_message = 'Ingrese su tarjeta de identidad';
+            } elseif (!is_numeric($cedula)) {
+                $error_message = 'Por favor, ingrese solo tarjeta de identidad';
+            } elseif (empty($nombre)) {
+                $error_message = 'Ingrese nombre y apellido';
+            } else {
+                $sql = "INSERT INTO alumnos (cedula_alumno, nombre, carrera, cod_candidato, voto)
+                        VALUES ('$cedula', '$nombre', '$municipio', '0', '0')";
+                $resultado = mysqli_query($cx, $sql);
+                if ($resultado) {
+                    $success_message = 'Alumno guardado correctamente';
+                    $acceso = "aprobado";
+                }
+            }
+            break;
+    }
 }
 
 ?>
 
 <div class="contenedor">
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <h1 class="text-center"><font color="white" size="7" face="Algerian">Registro de alumnos</font></h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 class="text-center">Registro de alumnos</h1>
+            </div>
+        </div>
     </div>
-  </div>
 
-</div>
+    <div class="center-block col-md-4 col-xs-8">
+        <form name="acceso" action="alumnos.php" role="form" method="post">
+            <div class="form-group">
+                <fieldset>
+                    <legend><em><strong><p style="color: white;">Seleccione el grado</p></strong></em></legend>
+                    <?php
+                    $sql = "SELECT * FROM carreras";
+                    $resultado = mysqli_query($cx, $sql);
+                    $num_reg = mysqli_num_rows($resultado);
+                    ?>
+                    <select name="municipios" onchange="submit();">
+                        <option value="">Seleccione el grado</option>
+                        <?php
+                        while ($reg = mysqli_fetch_array($resultado)) {
+                            $codigomun = $reg["carreras"];
+                            $carreras = $reg["carreras"];
+                            ?>
+                            <option value="<?php echo $codigomun; ?>" <?php if ($municipio == $codigomun) { echo "selected='selected'"; } ?>>
+                                <?php echo $carreras; ?>
+                            </option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                </fieldset>
+            </div>
 
- <div class="center-block col-md-4 col-xs-8">
-	
-<form name ="acceso" action="alumnos.php" role="form" method="post">
-  <div class="form-group">
+            <div class="form-group">
+                <label for="cedula"><p style="color:white">Tarjeta de identidad</p></label>
+                <input type="text" name="cedula" class="form-control" id="cedula" placeholder="">
+            </div>
 
-				
-<fieldset>
-							<legend><em><strong><font color="white" >Selecione el grado</font></strong></em></legend>
-						<?php
-					
-							$sql="select * from carreras";
-							$resultado=mysqli_query($cx,$sql);
-							$num_reg=mysqli_num_rows($resultado);
-						?>
-							<select name="municipios" onchange="submit();">
- 
-							<option value="" >Selecione el grado</option>
-							<?php
-								for ($i=0;$i<$num_reg;$i++){
+            <div class="form-group">
+                <label for="nombre"><p style="color:white">Nombre y apellido</p></label>
+                <input type="text" name="nombre" class="form-control" id="nombre" placeholder="">
+            </div>
 
-							$reg=mysqli_fetch_array($resultado);
-                                    $codigomun=$reg["carreras"];
-								$carreras=$reg["carreras"];
-							?>
-								<option value="<?php echo $codigomun; ?>"<?php if ($municipio==$codigomun){echo "selected='selected'";}?>><?php echo $carreras; ?></option>
-								
-							<?php
-							}
-						
-							?>
-						</select>
-					</fieldset>
+            <?php if (isset($error_message)) { ?>
+                <div class="alert alert-danger" role="alert">
+                    <?php echo $error_message; ?>
+                </div>
+            <?php } ?>
 
-					<br>
-  <div class="form-group">
-    <label for="Usuario"><font color="white" size="4">Tarjeta de identidad</font></label>
-    <input type="text" name="cedula" class="form-control" id="cedula" placeholder="">
-  </div>
-  <div class="form-group">
-    <label for="ejemplo_password_1"><font color="white" size="4"><center>Nombre y apellido</center></font></label>
-    <input type="text" name="nombre" class="form-control" id="nombre"  placeholder="">
-  </div>
-		
-<?php
-  
-    ?>
-<br> <input type ="submit" class="btn btn-primary" name="boton" Value="guardar">
+            <?php if (isset($success_message)) { ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo $success_message; ?>
+                </div>
+            <?php } ?>
 
-
-							 <input type ="submit"  class="btn btn-danger" name="boton" Value="Cancelar">
-</form>
-<?php
-    		if ($acceso=="aprobado") {
-    			echo '<script>alert("Alumno guardado correctamente")</script> ';
-			}
-    ?>
-
-</div>
+            <br>
+            <input type="submit" class="btn btn-primary" name="boton" value="guardar">
+            <input type="submit" class="btn btn-danger" name="boton" value="Cancelar">
+        </form>
+    </div>
 </div>
 
 <script src="js/jquery-1.11.3.min.js"></script>

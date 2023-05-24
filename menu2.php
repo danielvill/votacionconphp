@@ -61,81 +61,63 @@ float: right;
 
 }
 
-
+h1{
+	color: white;
+  font-size: 3.5em;
+  font-family: Algerian;
+}
+p{
+	color: white;
+	font-size: 4;
+}
 </style>
 
 <body>
 
 <?php
-   require_once("conexion.php");
+require_once("conexion.php");
 
-    
-		error_reporting(E_ALL ^ E_NOTICE);
-$vacio = isset($_POST['variable']) ? $_POST['variable'] : null ;
-    $acceso = isset($_POST['variable']) ? $_POST['variable'] : null ;
-	 session_start();
-        $cedula=$_SESSION["cedula_alumno"];
-     $carrera=$_SESSION["carrera"];
- if (empty($acceso)) {
-   
-}
-    if (isset($_POST["municipios"])){
-	 $municipio=$_POST["municipios"];
-	}else{
-	$municipio="";
-	}
+// Se recomienda establecer el nivel de error al principio del archivo
+error_reporting(E_ALL ^ E_NOTICE);
 
-if (isset($_POST["parroquias"])){
-	 $parroquias=$_POST["parroquias"];
-	}else{
-	$parroquias="";
-	}
-       if (isset($_POST["nombre"])){
-	 $nombre=$_POST["nombre"];
-	}else{
-	$nombre="";
-	}
+// Las variables $vacio y $acceso no se utilizan, puedes eliminarlas
 
-if (isset($_POST["cedula_candidato"])){
-	 $cedula_candidato=$_POST["cedula_candidato"];
-	}else{
-	$cedula_candidato="";
-	}
- if (isset($_POST["alumno"])) {
-    $alumno=$_POST["alumno"];
-}
-     if (isset($_POST["cod_candidato"])) {
-    $cod_candidato=$_POST["cod_candidato"];
-}
-     if (isset($_POST["cedula_alumno"])) {
-    $alu=$_POST["cedula_alumno"];
-}
+session_start();
+$cedula = isset($_SESSION["cedula_alumno"]) ? $_SESSION["cedula_alumno"] : "";
+$carrera = isset($_SESSION["carrera"]) ? $_SESSION["carrera"] : "";
 
+$municipio = isset($_POST["municipios"]) ? $_POST["municipios"] : "";
+$parroquias = isset($_POST["parroquias"]) ? $_POST["parroquias"] : "";
+$nombre = isset($_POST["nombre"]) ? $_POST["nombre"] : "";
+$cedula_candidato = isset($_POST["cedula_candidato"]) ? $_POST["cedula_candidato"] : "";
+$alumno = isset($_POST["alumno"]) ? $_POST["alumno"] : "";
+$cod_candidato = isset($_POST["cod_candidato"]) ? $_POST["cod_candidato"] : "";
+$alu = isset($_POST["cedula_alumno"]) ? $_POST["cedula_alumno"] : "";
 
 if (isset($_POST["boton"])) {
-    $boton=$_POST["boton"];
-	switch ($boton) {
-		case "votar":
+    $boton = $_POST["boton"];
+    switch ($boton) {
+        case "votar":
+            $sql = "UPDATE alumnos SET voto = '1', cod_candidato = '$municipio' WHERE cedula_Alumno = '$cedula'";
+            
+			$resultado = mysqli_query($cx, $sql);
+if ($resultado) {
+    $nr = mysqli_affected_rows($cx);
+    // Resto del código aquí...
 
-          
-           
-		$sql="update alumnos set voto='1', cod_candidato='$municipio' where cedula_Alumno='$cedula'";
-		$resultado=mysqli_query($cx,$sql);
-		$nr=mysqli_affected_rows($resultado);
-     
-        		?>
-         
-			<script>
-				 alert("Gracias por votar");
-				 window.location="index.php";
-			</script>   
-			<?php		
-		break;
-   
+            ?>
+            <script>
+                alert("Gracias por votar");
+                window.location = "index.php";
+            </script>
+            <?php
+            break;
+		}else {
+			// Manejar el error de la consulta SQL
+			echo "Error: " . mysqli_error($cx);
+		}
+    }
 }
-
-}
-
 ?>
 
 <div class="contenedor">
@@ -146,7 +128,7 @@ if (isset($_POST["boton"])) {
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <h1 class="text-center"><font color="white" size="7" face="Algerian">Sistema de Votación</font></h1>
+      <h1 class="text-center">Sistema de Votación</h1>
     </div>
   </div>
   <br>
@@ -160,7 +142,7 @@ if (isset($_POST["boton"])) {
 <br>
 <br>
 						<fieldset>
-							<legend><em><strong><font color="white">Candidatos</font></strong></em></legend>
+							<legend><em><strong><p>Candidatos</p></strong></em></legend>
 						<?php
 						
 							$sql="select * from candidatos";
