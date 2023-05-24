@@ -5,14 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Votación</title>
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/estilo.css" rel="stylesheet">
+<link href="../css/bootstrap.css" rel="stylesheet">
+<link href="../css/estilo.css" rel="stylesheet">
 </head>
 
 <style>
   
 body{
-background-image: url(img/voto.png);
+background-image: url(../img/voto.png);
 background-size: 100%;
 }
 .contenedor{
@@ -66,60 +66,8 @@ h1 {
 
 </nav>
 
-<?php
-require_once("conexion.php");
+<?php include '../src/alumnos.php'; ?>
 
-// Validar el acceso y la variable de formulario
-$acceso = $_POST['acceso'] ?? null;
-$vacio = $_POST['variable'] ?? null;
-
-session_start();
-
-if (isset($_POST["cedula_alumno"])) {
-    $cedula_alumno = $_POST["cedula_alumno"];
-} 
-
-
-if (empty($acceso)) {
-    // Acceso no válido
-}
-
-// Obtener los datos del formulario
-$id_carreras = $_POST["id_carreras"] ?? "";
-$municipio = $_POST["municipios"] ?? "";
-$parroquias = $_POST["parroquias"] ?? "";
-$nombre = $_POST["nombre"] ?? "";
-$cedula = $_POST["cedula"] ?? "";
-$alumno = $_POST["alumno"] ?? "";
-$cod_candidato = $_POST["cod_candidato"] ?? "";
-$alu = $_POST["cedula_alumno"] ?? "";
-
-if (isset($_POST["boton"])) {
-    $boton = $_POST["boton"];
-    switch ($boton) {
-        case "guardar":
-            if (empty($municipio)) {
-                $error_message = 'Ingrese el grado';
-            } elseif (empty($cedula)) {
-                $error_message = 'Ingrese su tarjeta de identidad';
-            } elseif (!is_numeric($cedula)) {
-                $error_message = 'Por favor, ingrese solo tarjeta de identidad';
-            } elseif (empty($nombre)) {
-                $error_message = 'Ingrese nombre y apellido';
-            } else {
-                $sql = "INSERT INTO alumnos (cedula_alumno, nombre, carrera, cod_candidato, voto)
-                        VALUES ('$cedula', '$nombre', '$municipio', '0', '0')";
-                $resultado = mysqli_query($cx, $sql);
-                if ($resultado) {
-                    $success_message = 'Alumno guardado correctamente';
-                    $acceso = "aprobado";
-                }
-            }
-            break;
-    }
-}
-
-?>
 
 <div class="contenedor">
     <div class="container-fluid">
@@ -186,8 +134,8 @@ if (isset($_POST["boton"])) {
     </div>
 </div>
 
-<script src="js/jquery-1.11.3.min.js"></script>
+<script src="../js/jquery-1.11.3.min.js"></script>
 
-<script src="js/bootstrap.js"></script>
+<script src="../js/bootstrap.js"></script>
 </body>
 </html>

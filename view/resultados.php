@@ -7,8 +7,8 @@
 <title>Votación</title>
 
 
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/estilo.css" rel="stylesheet">
+<link href="../css/bootstrap.css" rel="stylesheet">
+<link href="../css/estilo.css" rel="stylesheet">
 
 
 </head>
@@ -17,7 +17,7 @@
   
 body{
 
-background-image: url(img/voto.png);
+background-image: url(../img/voto.png);
 
 
 background-size: 100%;
@@ -101,78 +101,8 @@ p{
 
 </nav>
 
-<?php
-require_once("conexion.php");
-error_reporting(E_ALL ^ E_NOTICE);
+<?php include '../src/resultados.php'; ?>
 
-$vacio = isset($_POST['variable']) ? $_POST['variable'] : null;
-$acceso = isset($_POST['variable']) ? $_POST['variable'] : null;
-
-session_start();
-$cedula = $_SESSION["cedula_alumno"];
-$carrera = $_SESSION["carrera"];
-
-if (empty($acceso)) {
-    // Hacer algo si $acceso está vacío
-}
-
-if (isset($_POST["municipios"])) {
-    $municipio = $_POST["municipios"];
-} else {
-    $municipio = "";
-}
-
-if (isset($_POST["parroquias"])) {
-    $parroquias = $_POST["parroquias"];
-} else {
-    $parroquias = "";
-}
-
-if (isset($_POST["nombre"])) {
-    $nombre = $_POST["nombre"];
-} else {
-    $nombre = "";
-}
-
-if (isset($_POST["cedula_candidato"])) {
-    $cedula_candidato = $_POST["cedula_candidato"];
-} else {
-    $cedula_candidato = "";
-}
-
-if (isset($_POST["alumno"])) {
-    $alumno = $_POST["alumno"];
-}
-
-if (isset($_POST["cod_candidato"])) {
-    $cod_candidato = $_POST["cod_candidato"];
-}
-
-if (isset($_POST["cedula_alumno"])) {
-    $alu = $_POST["cedula_alumno"];
-}
-
-if (isset($_POST["boton"])) {
-    $boton = $_POST["boton"];
-
-    switch ($boton) {
-        case "votar":
-            $sql = "UPDATE alumnos SET voto='1', cod_candidato='$municipio' WHERE cedula_Alumno='$cedula'";
-            $resultado = mysqli_query($cx, $sql);
-            $nr = mysqli_affected_rows($resultado);//esta linea de codigo no la modifico ya que no es necesario hacerlo
-			// no me representa ningun error si esta sumando los votos pero necesito hacer para algun cambio si se presenta algo
-            
-            echo $nr;
-            
-            if ($nr >= 1) {
-                echo '<script>alert("");</script>';
-                echo $alu;
-            }
-            
-            break;
-    }
-}
-?>
 
 <div class="contenedor">
 
@@ -262,8 +192,8 @@ $resultado=mysqli_query($cx,$sql);
 </div>
 </div>
 
-<script src="js/jquery-1.11.3.min.js"></script>
+<script src="../js/jquery-1.11.3.min.js"></script>
 
-<script src="js/bootstrap.js"></script>
+<script src="../js/bootstrap.js"></script>
 </body>
 </html>
