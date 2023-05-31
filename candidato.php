@@ -9,57 +9,11 @@
 
 <link href="../css/bootstrap.css" rel="stylesheet">
 <link href="../css/estilo.css" rel="stylesheet">
+<link href="../css/estilo2.css" rel="stylesheet">
 
 
 </head>
 
-<style>
-  
-body{
-
-background-image: url(../img/voto.png);
-
-
-background-size: 100%;
-
-
-  
-}
-
-
-.contenedor{
-
-border-color: black;
-border:20px;
-margin-top: 20px;
-margin: 50px auto;
-border-radius: 10px;
-margin-right: 20%;
-margin-left: 20%;
-width: 60%;
-height: 500px;
-
-
-
-
-}
-
-.contenedor:hover{
-
-transition: .8s;
-background-color:rgba(0,0,0 ,.2);
-box-shadow:inset;
-}
-h1{
-	color: white;
-  font-size: 3.5em;
-  font-family: Algerian;
-}
-p{
-	color: white;
-}
-
-</style>
 
 
 <body>
@@ -103,22 +57,30 @@ p{
 
  <div class="center-block col-md-4 col-xs-8">
 
-<form name ="acceso" action="candidato.php" role="form" method="post">
+<form name ="acceso" action="candidato.php" role="form" method="post" enctype="multipart/form-data">
   <div class="form-group">
 
 				
 
 					
   <div class="form-group">
-    <label for="Usuario"><p>Tarjeta de identidad</p></label>
+    <label for="Usuario"><p>Nombre de la Lista</p></label>
     <input type="text" name="cedula" class="form-control" id="cedula"
            placeholder="">
   </div>
+  
   <div class="form-group">
     <label for="ejemplo_password_1"><p>Nombre y apellido</p></label>
     <input type="text" name="nombre" class="form-control" id="nombre" 
            placeholder="">
   </div>
+  
+  <div class="form-group">
+  <label for="imagen"><p>Imagen del candidato</p></label>
+  <input type="file" name="imagen" class="form-control" id="imagen" accept="image/*">
+</div>
+
+
 		
 <?php
   

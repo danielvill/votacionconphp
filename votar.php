@@ -9,62 +9,10 @@
 
 <link href="../css/bootstrap.css" rel="stylesheet">
 <link href="../css/estilo.css" rel="stylesheet">
+<link href="../css/estilo2.css" rel="stylesheet">
 
 
 </head>
-
-
-<style>
-
-body{
-
-
-background-image: url(../img/voto.png);
-
-
-background-size: 100%;
-
-
-}
-	
-.contenedor{
-
-border-color: black;
-border:20px;
-margin-top: 20px;
-margin: 50px auto;
-border-radius: 10px;
-margin-right: 25%;
-margin-left: 25%;
-width: 50%;
-height: 550px;
-
-
-
-
-}
-
-.contenedor:hover{
-
-transition: .8s;
-background-color:rgba(0,0,0 ,.2);
-box-shadow:inset;
-   
-
-}
-
-h1{
-	color: white;
-  font-size: 3.5em;
-  font-family: Algerian;
-  text-align: center;
-}
-p{
-	color: white;
-	font-size: 4;
-}
-
-</style>
 
 <body>
 
@@ -124,6 +72,6 @@ p{
 
 
 
-<h1> VOTACIONES 2023</h1>
+<h1 style="text-align: center;" > VOTACIONES </h1>
 </body>
 </html>

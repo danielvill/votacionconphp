@@ -25,8 +25,8 @@ if (isset($_POST["boton"])) {
 	    $resultado=mysqli_query ($cx,$sql);
 	    $datos=mysqli_fetch_array($resultado);
 	    $alu=$datos["cedula_alumno"];
-                $nombre=$datos["nombre"];
-	  $voto=$datos["voto"];
+        $nombre=$datos["nombre"];
+	    $voto=$datos["voto"];
 
 
 		if ($alumno==$alu) {

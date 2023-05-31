@@ -32,14 +32,7 @@ if (isset($_POST["boton"])) {
                 <?php
                 break;
             }
-            if (!is_numeric($cedula)) {
-                ?>
-                <script>
-                    alert('Por favor coloque solo números en la cedula');
-                </script>
-                <?php
-                break;
-            }
+            
             if (empty($nombre)) {
                 ?>
                 <script>
@@ -48,8 +41,12 @@ if (isset($_POST["boton"])) {
                 <?php
                 break;
             }
+     
+            // Este codigo es para guardar la foto del candidato para que se vaya bien a la base de datos 
+            $imagen = $_FILES['imagen']['tmp_name'];
+            $imagenContenido = addslashes(file_get_contents($imagen));
 
-            $sql = "INSERT INTO candidatos (cedula_candidato, nombre, cod_candidato) VALUES ('$cedula', '$nombre', '$cedula')";
+            $sql = "INSERT INTO candidatos (cedula_candidato, nombre, cod_candidato, imagen) VALUES ('$cedula', '$nombre', '$cedula', '$imagenContenido')";
             $resultado = mysqli_query($cx, $sql);
             if ($resultado) {
                 $acceso = "aprobado";
@@ -59,6 +56,8 @@ if (isset($_POST["boton"])) {
 				 
                 <?php
             }
+
+           
             $cedula = "";
             $usuario = "";
             $nombre = "";
