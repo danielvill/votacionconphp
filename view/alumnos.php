@@ -26,8 +26,9 @@
         <li class="active">
         <li><a href="alumnos.php">Agregar Alumno</a></li>
       <li><a href="candidato.php">Agregar Candidato</a></li>
-        <li><a href="resultados.php">Resultados</a></li>
-          <li><a href="votar.php">Votación</a></li>  
+        <li><a href="resultados.php">Resultados por Paralelo</a></li>
+          <li><a href="votar.php">Votación</a></li>
+          <li><a href="muestra.php">Resultado</a></li>  
       </ul>
 
   </div>

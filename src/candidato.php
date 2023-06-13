@@ -42,20 +42,25 @@ if (isset($_POST["boton"])) {
                 break;
             }
      
-            // Este codigo es para guardar la foto del candidato para que se vaya bien a la base de datos 
-            $imagen = $_FILES['imagen']['tmp_name'];
-            $imagenContenido = addslashes(file_get_contents($imagen));
+          /// "En esta parte del codigo lo que me permite es que no sea obligatorio el campo de imagen
+          // Por medio de una condicion para que encapsula la imagen y en este caso me permite para que lo obtenga como nulo
 
+            if (!empty($_FILES['imagen']['tmp_name'])) {
+                $imagen = $_FILES['imagen']['tmp_name'];
+                $imagenContenido = addslashes(file_get_contents($imagen));
+            } else {
+                $imagenContenido = null;
+            }
+            
             $sql = "INSERT INTO candidatos (cedula_candidato, nombre, cod_candidato, imagen) VALUES ('$cedula', '$nombre', '$cedula', '$imagenContenido')";
             $resultado = mysqli_query($cx, $sql);
             if ($resultado) {
                 $acceso = "aprobado";
-				
                 ?>
                 <!-- Aquí puedes agregar código HTML o JavaScript adicional en caso de éxito -->
-				 
                 <?php
             }
+            
 
            
             $cedula = "";

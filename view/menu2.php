@@ -18,7 +18,7 @@
 </head>
 <body>
 <?php include '../src/menu2.php'; ?>
-<?php include '../src/imagen.php'; ?>
+
 
 <div class="contenedor">
 	<div class="boton">

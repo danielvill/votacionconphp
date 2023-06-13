@@ -45,8 +45,9 @@
         <li class="active">
         <li><a href="alumnos.php">Cargar  Alumnos</a></li>
       <li><a href="candidato.php">Cargar candidato</a></li>
-        <li><a href="resultados.php">Resultados</a></li>
-          <li><a href="index.php">Votación</a></li>  
+        <li><a href="resultados.php">Resultados por paralelo</a></li>
+          <li><a href="index.php">Votación</a></li>
+          <li><a href="muestra.php">Resultado</a></li>  
       </ul>
 
   </div>

@@ -21,7 +21,7 @@ $alu = isset($_POST["cedula_alumno"]) ? $_POST["cedula_alumno"] : "";
 if (isset($_POST["boton"])) {
     $boton = $_POST["boton"];
     switch ($boton) {
-        case "votar":
+        case "VOTAR":
             $sql = "UPDATE alumnos SET voto = '1', cod_candidato = '$municipio' WHERE cedula_Alumno = '$cedula'";
             
 			$resultado = mysqli_query($cx, $sql);
