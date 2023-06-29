@@ -32,7 +32,7 @@ if ($resultado) {
             ?>
             <script>
                 alert("Gracias por votar");
-                window.location = "index.php";
+                window.location = "votar.php";
             </script>
             <?php
             break;
