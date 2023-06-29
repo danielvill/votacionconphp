@@ -7,7 +7,7 @@
     <title>Prueba para mostrar</title>
     <link href="../css/bootstrap.css" rel="stylesheet">
     <link href="../css/estilo.css" rel="stylesheet">
-    <link href="../css/estilo2.css" rel="stylesheet">
+    <link href="../css/menu2.css" rel="stylesheet">
 </head>
 <body>
 
