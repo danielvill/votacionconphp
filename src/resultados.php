@@ -52,12 +52,12 @@ if (isset($_POST["cedula_alumno"])) {
 if (isset($_POST["boton"])) {
     $boton = $_POST["boton"];
 
+    // Cambio de Codigo para que otras versiones php pueda ejecutarse en la linea 60
     switch ($boton) {
         case "votar":
             $sql = "UPDATE alumnos SET voto='1', cod_candidato='$municipio' WHERE cedula_Alumno='$cedula'";
             $resultado = mysqli_query($cx, $sql);
-            $nr = mysqli_affected_rows($resultado);
-            
+            $nr = mysqli_affected_rows($cx);
             echo $nr;
             
             if ($nr >= 1) {
